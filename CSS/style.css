@@ -1,3 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+#dialog {
+    background-color: red;
+}
+
+.hidden {
+    visibility: hidden;
+}
