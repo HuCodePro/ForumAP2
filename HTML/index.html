@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/output.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="text-3xl font-bold underline">
+        Hello world!
+      </h1>
+    <h1 class="bg-red-700">Bonsoir</h1>
+    <button id="buttonSignup"></button>
+    <div id="popupContainer">
+        <form id="formSignup" action="#" method="POST">
+            <div class="form-group">
+                <label for="input-nom">Nom :</label>
+                <input type="text" id="input-nom" name="nom" required>
+            </div>
+            <div class="form-group">
+                <label for="input-prenom">Prénom :</label>
+                <input type="text" id="input-prenom" name="prenom" required>
+            </div>
+            <div class="form-group">
+                <label for="input-email">Email :</label>
+                <input type="email" id="input-email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="input-password">Mot de passe :</label>
+                <input type="password" id="input-password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="input-confirm-password">Confirmer le mot de passe :</label>
+                <input type="password" id="input-confirm-password" name="confirm-password" required>
+            </div>
+            <button id="btn-inscrire" type="submit">S'inscrire</button>
+        </form>
+    </div>
+
+    <script href="../JS/script.js"></script>
+</body>
+</html>
