@@ -1,0 +1,72 @@
+const API_URL = 'https://s3-4683.nuage-peda.fr/Forum2/public/api/users';
+
+function apiSignup(prenom, nom, email, password) {
+    const data = {
+        email: email,
+        password: password,
+        prenom: prenom,
+        nom: nom,
+        dateInscription: new Date().toISOString(),
+    };
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'accept': 'application/ld+json',
+            'Content-Type': 'application/ld+json',
+        },
+        body: JSON.stringify(data),
+    };
+
+    // Retour visible directement
+    console.log('Envoi des données :', data);
+
+    return fetch(API_URL, options)
+        .then(response => {
+            console.log('Statut HTTP :', response.status);
+            if (!response.ok) {
+                return response.json().then(errData => {
+                    console.log('Erreur API :', errData);
+                    throw new Error(errData['hydra:description'] || 'Erreur inconnue');
+                });
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'API fetch :', error);
+            throw error;
+        });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const buttonSignup = document.getElementById('buttonSignup');
+    const formSignup = document.getElementById('formSignup');
+
+    buttonSignup.addEventListener('click', () => {
+        alert('Popup ouverte');
+    });
+
+    formSignup.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const prenom = document.getElementById('input-prenom').value;
+        const nom = document.getElementById('input-nom').value;
+        const email = document.getElementById('input-email').value;
+
+
+        // Vérification simple
+        console.log('Formulaire soumis avec :', { prenom, nom, email, password });
+
+   
+
+        apiSignup(prenom, nom, email, password)
+            .then(data => {
+                alert('Inscription réussie : ' + JSON.stringify(data));
+                console.log('Succès :', data);
+            })
+            .catch(error => {
+                alert('Erreur lors de l\'inscription : ' + error.message);
+                console.error('Erreur attrapée :', error);
+            });
+    });
+});
