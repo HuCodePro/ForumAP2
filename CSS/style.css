@@ -1,7 +1,41 @@
-#dialog {
-    background-color: red;
+
+.hidden1 {
+    display: none;
+}
+.hidden2 {
+    display: none;
 }
 
-.hidden {
-    display: none;
+
+
+
+#dialog {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="button"] {
+    background-color: #f44336;
+}
+
+button:hover {
+    opacity: 0.8;
 }
