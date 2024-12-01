@@ -114,13 +114,16 @@ async function ShowMessages() {
             console.log(message);
             const ulMessages = document.getElementById("liste-messages");
             var title = document.createElement("p")
+            var text = document.createElement("p")
             var li = document.createElement("li"); 
             title.classList.add('uppercase')
             li.classList.add("list-group-item")
             title.innerText = message.titre
-            li.innerText = message.contenu
+            text.innerText = message.contenu
             ulMessages.appendChild(li)
             li.appendChild(title)
+            li.appendChild(text)
+   
         }
     } catch (error) {
         console.log("Erreur :", erreur);
