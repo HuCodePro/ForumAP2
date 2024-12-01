@@ -1,41 +1,145 @@
-
-.hidden1 {
-    display: none;
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
 }
-.hidden2 {
-    display: none;
+
+/* Navigation */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 
+/* Hero Section */
+.hero-section {
+    background-color: #343a40;
+    color: white;
+    padding: 100px 20px;
+}
 
+.hero-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
 
+.hero-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
 
-#dialog {
-    background-color: white;
+/* Presentation Section */
+.presentation-section img {
+    max-width: 100%;
     border-radius: 10px;
-    padding: 20px;
-    width: 300px;
+}
+
+.presentation-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+/* Latest Messages */
+.latest-messages h2 {
+    font-size: 1.8rem;
+    color: #343a40;
+}
+
+#liste-messages {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+}
+
+.list-group-item {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+/* Dialog Box Styles */
+dialog {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    padding: 0;
+    width: 400px;
+    max-width: 90%;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+}
+
+/* Header of the dialog */
+.dialog-header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
     text-align: center;
 }
 
-.popup-content {
+/* Body of the dialog */
+.dialog-body {
+    padding: 20px;
+    background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-button {
-    background-color: #4CAF50;
-    color: white;
+/* Input fields */
+.dialog-body input {
+    width: 100%;
     padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.dialog-body input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Buttons */
+.dialog-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
+}
+
+.dialog-footer button {
+    padding: 10px 20px;
+    font-size: 1rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-button[type="button"] {
+.dialog-footer button#btn-inscrire {
+    background-color: #28a745;
+    color: white;
+}
+
+.dialog-footer button#btn-inscrire:hover {
+    background-color: #218838;
+}
+
+.dialog-footer button#closeDialog {
     background-color: #f44336;
+    color: white;
 }
 
-button:hover {
-    opacity: 0.8;
+.dialog-footer button#closeDialog:hover {
+    background-color: #d32f2f;
 }
