@@ -74,6 +74,7 @@ function apiSignup(prenom, nom, email, hashedPassword) {
 
   const options = {
       method: "POST",
+      mode: 'no-cors',
       headers: {
           accept: "application/ld+json",
           "Content-Type": "application/ld+json",
@@ -106,29 +107,66 @@ function apiSignup(prenom, nom, email, hashedPassword) {
 }
  // MESSAGE 
 
-async function ShowMessages() {
+ async function ShowMessages() {
     console.log('test');
     try {
         const messages = await getMessages(); 
+        const ulMessages = document.getElementById("liste-messages");
+
         for (const message of messages) {
             console.log(message);
-            const ulMessages = document.getElementById("liste-messages");
-            var title = document.createElement("p")
-            var text = document.createElement("p")
-            var li = document.createElement("li"); 
-            title.classList.add('uppercase')
-            li.classList.add("list-group-item")
-            title.innerText = message.titre
-            text.innerText = message.contenu
-            ulMessages.appendChild(li)
-            li.appendChild(title)
-            li.appendChild(text)
-   
+
+            const li = document.createElement("li");
+            const userInfo = document.createElement("span");
+            const userBadge = document.createElement("span");
+            const datePost = document.createElement("p");
+            const title = document.createElement("p");
+            const text = document.createElement("p");
+
+            li.classList.add("list-group-item");
+            userInfo.classList.add('text-uppercase');
+            title.classList.add('text-uppercase');
+            userBadge.classList.add("badge", "ms-2"); // Bootstrap style for badges
+
+            // Vérification du rôle de l'utilisateur
+            const userRoles = message.user.roles;
+            if (userRoles.includes("ROLE_ADMIN")) {
+                userBadge.innerText = "Administrateur";
+                userBadge.classList.add("bg-danger"); // Badge rouge pour admin
+            } else if (userRoles.includes("ROLE_USER")) {
+                userBadge.innerText = "Utilisateur";
+                userBadge.classList.add("bg-primary"); // Badge bleu pour utilisateur
+            }
+
+            // Affichage des informations principales
+            const userPrenom = message.user.prenom;
+            const parentUserPrenom = message.parent ? message.parent.user.prenom : null;
+
+            // Construire l'information utilisateur
+            if (parentUserPrenom) {
+                userInfo.innerText = `${userPrenom} (réponse à ${parentUserPrenom})`;
+            } else {
+                userInfo.innerText = userPrenom;
+            }
+
+            datePost.innerText = message.datePoste;
+            title.innerText = message.titre;
+            text.innerText = message.contenu;
+
+            // Ajout des éléments dans la liste
+            ulMessages.appendChild(li);
+            li.appendChild(userInfo);
+            userInfo.appendChild(userBadge); // Ajouter le badge à côté du nom
+            li.appendChild(datePost);
+            li.appendChild(title);
+            li.appendChild(text);
         }
     } catch (error) {
-        console.log("Erreur :", erreur);
+        console.log("Erreur :", error);
     }
 }
+
+
 ShowMessages(); 
 
 
