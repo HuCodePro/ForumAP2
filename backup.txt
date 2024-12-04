@@ -52,9 +52,6 @@
         <button id="buttonSignup" class="btn btn-primary btn-lg">
           S'inscrire
         </button>
-        <button id="buttonSignin" class="btn btn-secondary btn-lg">
-          Connexion
-        </button>
       </div>
     </header>
 
@@ -81,7 +78,6 @@
       </div>
     </section>
 
-    <!-- Message -->
     <section class="latest-messages py-5 bg-light">
       <div class="container">
         <h2 class="text-center mb-4">Derniers messages</h2>
@@ -89,15 +85,57 @@
       </div>
     </section>
 
-    <!-- Connexion -->
-    <div id="signin-container"></div>
-
-    <!-- Inscription (à implémenter si nécessaire) -->
-    <div id="signup-container"></div>
-
-    <!-- Modals Connexion & Inscription -->
-    <div id="signup-modal"></div>
-    <div id="signin-modal"></div>
+    <dialog id="dialog">
+      <div class="dialog-header">Inscription</div>
+      <div class="dialog-body">
+        <form id="formSignup" action="" method="post">
+          <div class="form-group">
+            <label for="input-prenom">Prénom :</label>
+            <input
+              type="text"
+              id="input-prenom"
+              name="prenom"
+              placeholder="Entrez votre prénom"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="input-nom">Nom :</label>
+            <input
+              type="text"
+              id="input-nom"
+              name="nom"
+              placeholder="Entrez votre nom"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="input-email">Email :</label>
+            <input
+              type="email"
+              id="input-email"
+              name="email"
+              placeholder="Entrez votre email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="input-password">Mot de passe :</label>
+            <input
+              type="password"
+              id="input-password"
+              name="password"
+              placeholder="Créez un mot de passe"
+              required
+            />
+          </div>
+        </form>
+      </div>
+      <div class="dialog-footer">
+        <button id="closeDialog" type="button">Fermer</button>
+        <button id="btn-inscrire" type="submit">S'inscrire</button>
+      </div>
+    </dialog>
 
     <script type="module" src="JS/script.js"></script>
   </body>

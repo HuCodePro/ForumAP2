@@ -1,10 +1,13 @@
 import { getMessages } from "./api/message.js";
-
+import { signupCompo } from "./Components/signupCompo.js";
+import { signinCompo } from "./Components/signinCompo.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Le script est chargé");
+  signupCompo("signup-container");
+  signinCompo("signin-container");
+  
 
-  // Gestion du modal
   const buttonSignup = document.getElementById("buttonSignup");
   const dialog = document.getElementById("dialog");
   const closeDialog = document.getElementById("closeDialog");
@@ -60,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Fonction API d'inscription
+// Fonction API d'inscription    
 function apiSignup(prenom, nom, email, hashedPassword) {
   const API_URL = "https://s3-4683.nuage-peda.fr/Forum2/public/api/users";
 
