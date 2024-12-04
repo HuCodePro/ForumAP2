@@ -129,23 +129,22 @@ function apiSignup(prenom, nom, email, hashedPassword) {
             li.classList.add("list-group-item");
             userInfo.classList.add('text-uppercase');
             title.classList.add('text-uppercase');
-            userBadge.classList.add("badge", "ms-2"); // Bootstrap style for badges
+            userBadge.classList.add("badge", "ms-2"); 
 
-            // Vérification du rôle de l'utilisateur
             const userRoles = message.user.roles;
             if (userRoles.includes("ROLE_ADMIN")) {
                 userBadge.innerText = "Administrateur";
-                userBadge.classList.add("bg-danger"); // Badge rouge pour admin
+                userBadge.classList.add("bg-danger");
             } else if (userRoles.includes("ROLE_USER")) {
                 userBadge.innerText = "Utilisateur";
-                userBadge.classList.add("bg-primary"); // Badge bleu pour utilisateur
+                userBadge.classList.add("bg-primary"); 
             }
 
-            // Affichage des informations principales
+          
             const userPrenom = message.user.prenom;
             const parentUserPrenom = message.parent ? message.parent.user.prenom : null;
 
-            // Construire l'information utilisateur
+     
             if (parentUserPrenom) {
                 userInfo.innerText = `${userPrenom} (réponse à ${parentUserPrenom})`;
             } else {
@@ -156,10 +155,10 @@ function apiSignup(prenom, nom, email, hashedPassword) {
             title.innerText = message.titre;
             text.innerText = message.contenu;
 
-            // Ajout des éléments dans la liste
+  
             ulMessages.appendChild(li);
             li.appendChild(userInfo);
-            userInfo.appendChild(userBadge); // Ajouter le badge à côté du nom
+            userInfo.appendChild(userBadge); 
             li.appendChild(datePost);
             li.appendChild(title);
             li.appendChild(text);

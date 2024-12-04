@@ -63,30 +63,11 @@ export function signinCompo(containerId) {
         console.error("Erreur : certains éléments du modal de connexion sont introuvables !");
     }
 
-    // Vérifier si l'API est disponible
-    async function isApiAvailable(url) {
-        try {
-            const response = await fetch(url, { method: "OPTIONS" });
-            return response.ok;
-        } catch (error) {
-            console.error("API non disponible :", error);
-            return false;
-        }
-    }
-
     // Fonction pour appeler l'API de connexion
     async function apiSignin(email, password) {
         const API_URL = "https://s3-4683.nuage-peda.fr/Forum2/public/api/authentication_token";
 
-        /*if (!(await isApiAvailable(API_URL))) {
-            throw new Error("L'API de connexion n'est pas disponible. Vérifiez l'URL ou la configuration.");
-        }
-*/
-        const data = {
-            email: email,
-            password: password
-            };
-           
+        const data = { email, password };
         const options = {
             method: "POST",
             headers: {
@@ -98,7 +79,6 @@ export function signinCompo(containerId) {
 
         try {
             const response = await fetch(API_URL, options);
-                console.log(response)
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData["hydra:description"] || "Erreur inconnue");
@@ -109,6 +89,27 @@ export function signinCompo(containerId) {
             console.error("Erreur lors du fetch de connexion :", error);
             throw error;
         }
+    }
+
+    // Vérifier si l'utilisateur est déjà connecté
+    const token = localStorage.getItem("token");
+    if (token) {
+        buttonSignin.style.display = "none";
+
+        const userInfo = document.createElement("div");
+        userInfo.innerHTML = `
+            <p>Vous êtes déjà connecté !</p>
+            <button id="logoutButton" class="btn btn-warning">Déconnexion</button>
+        `;
+        container.appendChild(userInfo);
+
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            localStorage.removeItem("token");
+            alert("Déconnexion réussie !");
+            window.location.reload();
+        });
+
+        return; // Stop further execution as the user is already logged in
     }
 
     // Gestion du formulaire de connexion
@@ -126,7 +127,7 @@ export function signinCompo(containerId) {
                 const data = await apiSignin(email, password);
 
                 // Stocker le token
-                sessionStorage.setItem("token", data.token);
+                localStorage.setItem("token", data.token);
 
                 // Modifier l'interface utilisateur
                 alert(`Connexion réussie ! Bienvenue ${data.prenom || ""} ${data.nom || ""}.`);
@@ -142,7 +143,7 @@ export function signinCompo(containerId) {
 
                 // Gérer la déconnexion
                 document.getElementById("logoutButton").addEventListener("click", () => {
-                    sessionStorage.removeItem("token");
+                    localStorage.removeItem("token");
                     alert("Déconnexion réussie !");
                     window.location.reload();
                 });
