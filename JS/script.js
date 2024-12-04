@@ -1,34 +1,33 @@
 import { getMessages } from "./api/message.js";
 import { signupCompo } from "./Components/signupCompo.js";
 import { signinCompo } from "./Components/signinCompo.js";
+import MessageComponent from "./Components/MessageComponent.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   console.log("Le script est chargé");
+
+  // Initialisation des composants d'inscription et de connexion
   signupCompo("signup-container");
   signinCompo("signin-container");
 
-  // MESSAGE
-  async function ShowMessages() {
-    console.log("test");
-    try {
-      const messages = await getMessages();
-      for (const message of messages) {
-        console.log(message);
-        const ulMessages = document.getElementById("liste-messages");
-        var title = document.createElement("p");
-        var text = document.createElement("p");
-        var li = document.createElement("li");
-        title.classList.add("uppercase");
-        li.classList.add("list-group-item");
-        title.innerText = message.titre;
-        text.innerText = message.contenu;
-        ulMessages.appendChild(li);
-        li.appendChild(title);
-        li.appendChild(text);
-      }
-    } catch (error) {
-      console.log("Erreur :", erreur);
+  // Initialisation des messages
+  const containerId = "liste-messages"; // ID du conteneur des messages
+
+  try {
+    // Récupération des messages via l'API
+    const messages = await getMessages();
+
+    // Utilisation du composant MessageComponent
+    new MessageComponent(containerId, messages);
+    console.log("Messages affichés avec succès !");
+  } catch (error) {
+    console.error("Erreur lors de la récupération des messages :", error);
+
+    // Gestion de l'erreur dans le conteneur
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.innerHTML =
+        '<li class="list-group-item text-danger">Erreur lors du chargement des messages.</li>';
     }
   }
-  ShowMessages();
 });

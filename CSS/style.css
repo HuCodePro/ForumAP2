@@ -148,3 +148,26 @@ dialog {
 .dialog-footer button#closeDialog:hover {
     background-color: #d32f2f;
 }
+
+.message {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .message-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .message-content {
+    margin-bottom: 10px;
+  }
+  
+  .replies {
+    margin-left: 20px;
+    border-left: 2px solid #ddd;
+    padding-left: 10px;
+  }
+  
