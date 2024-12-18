@@ -7,34 +7,38 @@ export function signinCompo(containerId) {
     }
 
     container.innerHTML = `
-        <button id="buttonSignin">Se connecter</button>
+        <button id="buttonSignin" class="btn btn-primary">Se connecter</button>
         <dialog id="dialogSignin">
-          <div class="dialog-header">Connexion</div>
+          <div class="dialog-header">
+            <h2>Connexion</h2>
+          </div>
           <div class="dialog-body">
             <form id="formSignin" action="" method="post">
-              <div class="form-group">
+              <div class="form-group mb-3">
                 <label for="input-email">Email :</label>
                 <input
                   type="email"
                   id="input-email"
                   name="email"
+                  class="form-control"
                   placeholder="Entrez votre email"
                   required
                 />
               </div>
-              <div class="form-group">
+              <div class="form-group mb-3">
                 <label for="input-password">Mot de passe :</label>
                 <input
                   type="password"
                   id="input-password"
                   name="password"
+                  class="form-control"
                   placeholder="Saisissez votre mot de passe"
                   required
                 />
               </div>
               <div class="dialog-footer">
-                <button id="closeDialogSignin" type="button">Fermer</button>
-                <button id="btn-connexion" type="submit">Se connecter</button>
+                <button id="closeDialogSignin" type="button" class="btn btn-secondary">Fermer</button>
+                <button id="btn-connexion" type="submit" class="btn btn-primary">Se connecter</button>
               </div>
             </form>
           </div>
@@ -48,44 +52,37 @@ export function signinCompo(containerId) {
 
     if (buttonSignin && dialogSignin && closeDialogSignin) {
         buttonSignin.addEventListener("click", () => {
-            console.log("Affichage du modal de connexion");
             dialogSignin.showModal();
         });
 
         closeDialogSignin.addEventListener("click", () => {
-            console.log("Fermeture du modal de connexion");
             dialogSignin.close();
         });
     } else {
         console.error("Erreur : certains éléments du modal de connexion sont introuvables !");
     }
 
+<<<<<<< HEAD
+=======
+    // Fonction pour appeler l'API de connexion
+>>>>>>> 67076d711817c7723f7e37830983d82af7f25b2d
     async function apiSignin(email, password) {
-        const API_URL = "https://s3-4683.nuage-peda.fr/Forum2/public/api/login";
+        const API_URL = "https://s3-4683.nuage-peda.fr/Forum2/public/api/authentication_token";
 
-        const data = {
-            email: email,
-            password: password,
-        };
-
+        const data = { email, password };
         const options = {
             method: "POST",
             headers: {
-                accept: "application/ld+json",
+                "accept": "application/ld+json",
                 "Content-Type": "application/ld+json",
             },
             body: JSON.stringify(data),
         };
 
-        console.log("Envoi des données API de connexion :", data);
-
         try {
             const response = await fetch(API_URL, options);
-            console.log("Statut HTTP de connexion :", response.status);
-
             if (!response.ok) {
                 const errorData = await response.json();
-                console.error("Erreur API :", errorData);
                 throw new Error(errorData["hydra:description"] || "Erreur inconnue");
             }
 
@@ -96,6 +93,31 @@ export function signinCompo(containerId) {
         }
     }
 
+<<<<<<< HEAD
+=======
+    // Vérifier si l'utilisateur est déjà connecté
+    const token = localStorage.getItem("token");
+    if (token) {
+        buttonSignin.style.display = "none";
+
+        const userInfo = document.createElement("div");
+        userInfo.innerHTML = `
+            <p>Vous êtes déjà connecté !</p>
+            <button id="logoutButton" class="btn btn-warning">Déconnexion</button>
+        `;
+        container.appendChild(userInfo);
+
+        document.getElementById("logoutButton").addEventListener("click", () => {
+            localStorage.removeItem("token");
+            alert("Déconnexion réussie !");
+            window.location.reload();
+        });
+
+        return; // Stop further execution as the user is already logged in
+    }
+
+    // Gestion du formulaire de connexion
+>>>>>>> 67076d711817c7723f7e37830983d82af7f25b2d
     const formSignin = document.getElementById("formSignin");
 
     if (formSignin) {
@@ -105,25 +127,37 @@ export function signinCompo(containerId) {
             const email = document.getElementById("input-email").value;
             const password = document.getElementById("input-password").value;
 
-            console.log("Formulaire soumis :", { email, password });
-
             try {
                 // Appeler l'API de connexion
                 const data = await apiSignin(email, password);
-                console.log("Connexion réussie :", data);
 
-                // Afficher un message de succès et fermer le modal
+                // Stocker le token
+                localStorage.setItem("token", data.token);
+
+                // Modifier l'interface utilisateur
                 alert(`Connexion réussie ! Bienvenue ${data.prenom || ""} ${data.nom || ""}.`);
                 dialogSignin.close();
-            } catch (error) {
-                console.error("Erreur lors de la connexion :", error);
+                buttonSignin.style.display = "none";
 
-                // Gestion visuelle des erreurs
+                const userInfo = document.createElement("div");
+                userInfo.innerHTML = `
+                    <p>Bienvenue, ${data.prenom || "utilisateur"} !</p>
+                    <button id="logoutButton" class="btn btn-warning">Déconnexion</button>
+                `;
+                container.appendChild(userInfo);
+
+                // Gérer la déconnexion
+                document.getElementById("logoutButton").addEventListener("click", () => {
+                    localStorage.removeItem("token");
+                    alert("Déconnexion réussie !");
+                    window.location.reload();
+                });
+            } catch (error) {
                 alert("Erreur lors de la connexion : " + error.message);
 
                 // Ajouter une classe d'erreur aux champs
-                document.getElementById("input-email").classList.add("error");
-                document.getElementById("input-password").classList.add("error");
+                document.getElementById("input-email").classList.add("is-invalid");
+                document.getElementById("input-password").classList.add("is-invalid");
             }
         });
     } else {

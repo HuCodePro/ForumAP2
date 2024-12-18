@@ -149,6 +149,7 @@ dialog {
     background-color: #d32f2f;
 }
 
+<<<<<<< HEAD
 .profil-dialog {
     border: none;
     border-radius: 8px;
@@ -227,3 +228,27 @@ dialog {
     font-size: 18px;
   }
   
+=======
+.message {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .message-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .message-content {
+    margin-bottom: 10px;
+  }
+  
+  .replies {
+    margin-left: 20px;
+    border-left: 2px solid #ddd;
+    padding-left: 10px;
+  }
+  
+>>>>>>> 67076d711817c7723f7e37830983d82af7f25b2d
