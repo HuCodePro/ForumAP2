@@ -6,7 +6,6 @@ export function signinCompo(containerId) {
         return;
     }
 
-    // Ajouter le contenu HTML dans le conteneur
     container.innerHTML = `
         <button id="buttonSignin">Se connecter</button>
         <dialog id="dialogSignin">
@@ -42,7 +41,7 @@ export function signinCompo(containerId) {
         </dialog>
     `;
 
-    // Gestion du modal de connexion
+
     const buttonSignin = document.getElementById("buttonSignin");
     const dialogSignin = document.getElementById("dialogSignin");
     const closeDialogSignin = document.getElementById("closeDialogSignin");
@@ -61,7 +60,6 @@ export function signinCompo(containerId) {
         console.error("Erreur : certains éléments du modal de connexion sont introuvables !");
     }
 
-    // Fonction API de connexion
     async function apiSignin(email, password) {
         const API_URL = "https://s3-4683.nuage-peda.fr/Forum2/public/api/login";
 
@@ -98,7 +96,6 @@ export function signinCompo(containerId) {
         }
     }
 
-    // Gestion du formulaire de connexion
     const formSignin = document.getElementById("formSignin");
 
     if (formSignin) {

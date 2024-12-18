@@ -43,6 +43,13 @@
       </div>
     </nav>
 
+    <div class="search-container">
+      <input type="text" id="searchInput" class="form-control" placeholder="Rechercher des messages...">
+      <button id="searchBtn" class="btn btn-primary">
+        <i class="fas fa-search"></i> 
+      </button>
+    </div>
+
     <header class="hero-section text-center text-white">
       <div class="container">
         <h1>Bienvenue sur le Forum</h1>
@@ -54,6 +61,9 @@
         </button>
         <button id="buttonSignin" class="btn btn-secondary btn-lg">
           Connexion
+        </button>
+        <button id="buttonProfil" class="btn btn-danger btn-lg">
+          Profil
         </button>
       </div>
     </header>
@@ -81,7 +91,6 @@
       </div>
     </section>
 
-    <!-- Message -->
     <section class="latest-messages py-5 bg-light">
       <div class="container">
         <h2 class="text-center mb-4">Derniers messages</h2>
@@ -89,13 +98,13 @@
       </div>
     </section>
 
-    <!-- Connexion & Inscription -->
     <div id="signup-container"></div>
     <div id="signin-container"></div>
+    <div id="profil-container"></div>    
 
-    <!-- Modals Connexion & Inscription -->
     <div id="signup-modal"></div>
     <div id="signin-modal"></div>
+    <div id="profil-modal"></div>
 
     <script type="module" src="JS/script.js"></script>
   </body>

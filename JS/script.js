@@ -1,13 +1,16 @@
 import { getMessages } from "./api/message.js";
 import { signupCompo } from "./Components/signupCompo.js";
 import { signinCompo } from "./Components/signinCompo.js";
+import { profilCompo } from "./Components/profilCompo.js";
+import { searchCompo } from "./Components/searchCompo.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Le script est chargé");
   signupCompo("signup-container");
   signinCompo("signin-container");
+  profilCompo("profil-container");
+  searchCompo();
 
-  // MESSAGE
   async function ShowMessages() {
     console.log("test");
     try {
@@ -27,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         li.appendChild(text);
       }
     } catch (error) {
-      console.log("Erreur :", erreur);
+      console.log("Erreur :", error);
     }
   }
   ShowMessages();

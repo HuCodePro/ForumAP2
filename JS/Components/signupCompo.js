@@ -1,5 +1,4 @@
 export function signupCompo(containerId) {
-    // Trouver le conteneur
     const container = document.getElementById(containerId);
 
     if (!container) {
@@ -7,7 +6,6 @@ export function signupCompo(containerId) {
         return;
     }
 
-    // Ajouter le contenu HTML dans le conteneur
     container.innerHTML = `
         <button id="buttonSignup">S'inscrire</button>
         <dialog id="dialog">
@@ -63,7 +61,6 @@ export function signupCompo(containerId) {
         </dialog>
     `;
 
-    // Gestion du modal
     const buttonSignup = document.getElementById("buttonSignup");
     const dialog = document.getElementById("dialog");
     const closeDialog = document.getElementById("closeDialog");
@@ -82,7 +79,6 @@ export function signupCompo(containerId) {
         console.error("Erreur : certains éléments du modal sont introuvables !");
     }
 
-    // Fonction pour hacher le mot de passe avec SHA-256
     async function hashPassword(password) {
         try {
             const encoder = new TextEncoder();
@@ -142,7 +138,6 @@ export function signupCompo(containerId) {
       
       }
 
-    // Gestion du formulaire
     const formSignup = document.getElementById("formSignup");
 
     if (formSignup) {
@@ -157,11 +152,9 @@ export function signupCompo(containerId) {
             console.log("Formulaire soumis :", { prenom, nom, email });
 
             try {
-                // Hacher le mot de passe
                 const hashedPassword = await hashPassword(password);
                 console.log("Mot de passe haché :", hashedPassword);
 
-                // Appeler l'API d'inscription avec le mot de passe haché
                 apiSignup(prenom, nom, email, hashedPassword)
                     .then((data) => {
                         console.log("Inscription réussie :", data);
